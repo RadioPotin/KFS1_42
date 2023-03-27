@@ -21,11 +21,6 @@ tar -xvf grub-2.06.tar.xz
 tar xvzf binutils-2.35.tar.gz
 tar xvzf texinfo-6.8.tar.gz
 
-
-
-
-
-
 cd binutils-2.35
 ./configure --target=$TARGET --prefix="$PREFIX" --with-sysroot --disable-nls --disable-werror
 make
