@@ -33,10 +33,11 @@ link: ${OBJ} ${ldfile}
 	@echo we link
 	${LD} ${LDFLAGS} ${OBJ} -o ${BIN}
 
-clean: 
+clean: all 
 	@rm *.o
 	@rm -rf ${build_dir}
 	@rm -rf isodir
+fclean: clean
 	@rm ${ISO}
 
 run: all
