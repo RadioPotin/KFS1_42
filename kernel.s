@@ -3,6 +3,7 @@ BITS 32
  
 VGA_WIDTH equ 80
 VGA_HEIGHT equ 25
+SCREEN_ADDR equ 0xb8000
  
 VGA_COLOR_BLACK equ 0
 VGA_COLOR_BLUE equ 1
@@ -69,8 +70,8 @@ terminal_putentryat:
     mov ebx, edx
  
     mov dl, [terminal_color]
-    mov byte [0xB8000 + ebx], al
-    mov byte [0xB8001 + ebx], dl
+    mov byte [SCREEN_ADDR + ebx], al
+    mov byte [SCREEN_ADDR + ebx + 1], dl
  
  
     popa
