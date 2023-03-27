@@ -21,6 +21,7 @@ clean:
 	rm *.o
 	rm kernel
 	rm -rf isodir
+	rm kfs.iso
 
 
 
