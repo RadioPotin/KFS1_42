@@ -3,4 +3,4 @@
 mkdir -p isodir/boot/grub
 cp kernel isodir/boot/kernel
 cp grub.cfg isodir/boot/grub/grub.cfg
-grub-mkrescue -o iso_created isodir
+grub-mkrescue -o kfs.iso isodir
