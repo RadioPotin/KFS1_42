@@ -10,7 +10,11 @@ OBJ = $(src:.s=.o)
 	nasm -felf32 $<  -o $@ 
 
 all: ${OBJ}
-	echo $@
+	@echo we link
+	ld  -m elf_i386 -T linker.ld ${OBJ} -o kernel
+	@echo we create iso
+	bash create_iso.sh
+
 
 
 clean: 
