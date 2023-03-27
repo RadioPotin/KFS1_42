@@ -26,7 +26,7 @@ all: ${OBJ} link
 	mkdir -p isodir/boot/grub
 	cp build/kernel isodir/boot/kernel
 	cp grub.cfg isodir/boot/grub/grub.cfg
-	grub-mkrescue -o kfs.iso isodir
+	grub-mkrescue -o ${ISO} isodir
 
 #https://wiki.osdev.org/GRUB
 link: ${OBJ} ${ldfile}
@@ -35,11 +35,11 @@ link: ${OBJ} ${ldfile}
 
 clean: 
 	@rm *.o
-	@rm kernel
+	@rm -rf ${build_dir}
 	@rm -rf isodir
-	@rm kfs.iso
+	@rm ${ISO}
 
-run:
+run: all
 	 qemu-system-i386 -s -cdrom ${ISO}
 
 
