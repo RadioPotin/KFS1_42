@@ -15,5 +15,8 @@ all: ${OBJ}
 
 clean: 
 	rm *.o
+	rm kernel
+	rm -rf isodir
+
 
 .PHONY: all re clean fclean
