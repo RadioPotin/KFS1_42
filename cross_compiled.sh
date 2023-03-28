@@ -1,7 +1,19 @@
+#!/bin/bash
+
+set -xeu
+if [ -z "$TARGET" ]; then
+    echo "Must provide TARGET in environment" 1>&2
+    exit 1
+fi
+if [ -z "$PREFIX" ]; then
+    echo "Must provide PREFIX in environment" 1>&2
+    exit 1
+fi
 
 export PREFIX="$HOME/mycross_cross"
 export TARGET=i686-elf
 export PATH="$PREFIX/bin:$PATH"
+
 
 
 mkdir $PREFIX
