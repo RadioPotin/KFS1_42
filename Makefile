@@ -16,11 +16,8 @@ LDFLAGS := -m elf_i386 -T ${ldfile}
 
 
 
-%.o: %.s
-	mkdir -p ${build_dir}
-	nasm -felf32 $<  -o $@ 
 
-all: ${OBJ} link 
+all: ${BIN} 
 	@echo we create iso
 	# https://wiki.osdev.org/Bare_Bones#Booting_the_Kernel
 	mkdir -p isodir/boot/grub
@@ -28,8 +25,12 @@ all: ${OBJ} link
 	cp grub.cfg isodir/boot/grub/grub.cfg
 	grub-mkrescue -o ${ISO} isodir
 
+%.o: %.s
+	mkdir -p ${build_dir}
+	nasm -felf32 $<  -o $@ 
+
 #https://wiki.osdev.org/GRUB
-link: ${OBJ} ${ldfile}
+${BIN}: ${OBJ} ${ldfile}
 	@echo we link
 	${LD} ${LDFLAGS} ${OBJ} -o ${BIN}
 
