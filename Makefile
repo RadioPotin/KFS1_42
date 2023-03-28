@@ -15,13 +15,14 @@ ldfile := linker.ld
 LDFLAGS := -m elf_i386 -T ${ldfile}
 
 
+all: ${BIN} ${ISO}
 
 
-all: ${BIN} 
+${ISO}: ${BIN} 
 	@echo we create iso
 	# https://wiki.osdev.org/Bare_Bones#Booting_the_Kernel
 	mkdir -p isodir/boot/grub
-	cp build/kernel isodir/boot/kernel
+	cp ${BIN} isodir/boot/kernel
 	cp grub.cfg isodir/boot/grub/grub.cfg
 	grub-mkrescue -o ${ISO} isodir
 
@@ -34,12 +35,15 @@ ${BIN}: ${OBJ} ${ldfile}
 	@echo we link
 	${LD} ${LDFLAGS} ${OBJ} -o ${BIN}
 
-clean: all 
+clean: ${ISO} 
 	@rm *.o
 	@rm -rf ${build_dir}
 	@rm -rf isodir
 fclean: clean
 	@rm ${ISO}
+
+re: fclean 
+	make
 
 run: all
 	 qemu-system-i386 -s -cdrom ${ISO}
