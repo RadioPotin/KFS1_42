@@ -35,12 +35,12 @@ ${BIN}: ${OBJ} ${ldfile}
 	@echo we link
 	${LD} ${LDFLAGS} ${OBJ} -o ${BIN}
 
-clean: ${ISO} 
-	@rm *.o
+clean: 
+	@rm -f ${OBJ}
 	@rm -rf ${build_dir}
 	@rm -rf isodir
 fclean: clean
-	@rm ${ISO}
+	@rm -f ${ISO}
 
 re: fclean 
 	make
