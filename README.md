@@ -1,3 +1,6 @@
+# KFS1_42
+
+A basic Kernel to Boot from with GRUB
 
 
 run bash cross_compiled.
@@ -19,8 +22,4 @@ qemu-system-i386 -s -cdrom kfs.iso
 
 
 les fichier en .s viennent de https://wiki.osdev.org/Bare_Bones_with_NASM 
-
-
-
-
 
