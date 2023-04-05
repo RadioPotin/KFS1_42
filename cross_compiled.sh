@@ -68,4 +68,3 @@ cd grub-2.06
 make
 make install
 cd ..
-

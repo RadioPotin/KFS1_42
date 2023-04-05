@@ -1,6 +1,3 @@
-
-
-
 build_dir = build
 src = boot.s kernel_simple.s
 
@@ -18,7 +15,7 @@ LDFLAGS := -m elf_i386 -T ${ldfile}
 all: ${BIN} ${ISO}
 
 
-${ISO}: ${BIN} 
+${ISO}: ${BIN}
 	@echo we create iso
 	# https://wiki.osdev.org/Bare_Bones#Booting_the_Kernel
 	mkdir -p isodir/boot/grub
@@ -28,21 +25,30 @@ ${ISO}: ${BIN}
 
 %.o: %.s
 	mkdir -p ${build_dir}
-	nasm -felf32 $<  -o $@ 
+	nasm -felf32 $<  -o $@
+
+all: ${OBJ} link
+	@echo we create iso
+	# https://wiki.osdev.org/Bare_Bones#Booting_the_Kernel
+	mkdir -p isodir/boot/grub
+	cp build/kernel isodir/boot/kernel
+	cp grub.cfg isodir/boot/grub/grub.cfg
+	grub-mkrescue -o ${ISO} isodir
 
 #https://wiki.osdev.org/GRUB
 ${BIN}: ${OBJ} ${ldfile}
 	@echo we link
 	${LD} ${LDFLAGS} ${OBJ} -o ${BIN}
 
-clean: 
-	@rm -f ${OBJ}
+clean: all
+	@rm *.o
 	@rm -rf ${build_dir}
 	@rm -rf isodir
+
 fclean: clean
 	@rm -f ${ISO}
 
-re: fclean 
+re: fclean
 	make
 
 run: all
